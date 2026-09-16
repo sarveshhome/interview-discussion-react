@@ -1,0 +1,160 @@
+<mxfile host="app.diagrams.net" modified="2026-08-01T12:00:00.000Z" agent="Kimi" version="24.7.0" etag="medicare-azure" type="device">
+  <diagram name="MediCare Portal Architecture" id="medicare-portal-001">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="&lt;b&gt;MediCare Portal — Production Azure Architecture&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontColor=#0078D4;" parent="1" vertex="1">
+          <mxGeometry x="400" y="10" width="600" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="user" value="&lt;b&gt;Patient / User&lt;/b&gt;&#xa;Browser / Mobile App" style="shape=mxgraph.azure.user;fillColor=#ffffff;strokeColor=#0078D4;html=1;" parent="1" vertex="1">
+          <mxGeometry x="80" y="80" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="frontdoor" value="&lt;b&gt;Azure Front Door&lt;/b&gt;&#xa;+ WAF Policy" style="shape=mxgraph.azure.front_door;fillColor=#ffffff;strokeColor=#0078D4;html=1;" parent="1" vertex="1">
+          <mxGeometry x="280" y="80" width="100" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ddos" value="&lt;b&gt;DDoS Protection&lt;/b&gt;&#xa;Standard" style="shape=mxgraph.azure.ddos_protection_standard;fillColor=#ffffff;strokeColor=#0078D4;html=1;" parent="1" vertex="1">
+          <mxGeometry x="280" y="180" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="hub_vnet" value="&lt;b&gt;HUB VNet&lt;/b&gt;&#xa;10.0.0.0/16" style="swimlane;shape=mxgraph.azure.virtual_network;fillColor=#E1F5FE;strokeColor=#0078D4;swimlaneFillColor=#E1F5FE;rounded=1;arcSize=10;html=1;" parent="1" vertex="1">
+          <mxGeometry x="50" y="280" width="1300" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="hub_nsg" value="&lt;b&gt;NSG&lt;/b&gt;&#xa;Hub" style="shape=mxgraph.azure.network_security_group;fillColor=#ffffff;strokeColor=#0078D4;html=1;" parent="1" vertex="1">
+          <mxGeometry x="80" y="320" width="80" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="az_fw" value="&lt;b&gt;Azure Firewall&lt;/b&gt;&#xa;+ Threat Intel" style="shape=mxgraph.azure.firewall;fillColor=#ffffff;strokeColor=#0078D4;html=1;" parent="1" vertex="1">
+          <mxGeometry x="600" y="320" width="100" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="bastion" value="&lt;b&gt;Azure Bastion&lt;/b&gt;" style="shape=mxgraph.azure.bastion;fillColor=#ffffff;strokeColor=#0078D4;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1100" y="320" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="spoke_vnet" value="&lt;b&gt;SPOKE VNet&lt;/b&gt;&#xa;10.1.0.0/16" style="swimlane;shape=mxgraph.azure.virtual_network;fillColor=#F3E5F5;strokeColor=#7B1FA2;swimlaneFillColor=#F3E5F5;rounded=1;arcSize=10;html=1;" parent="1" vertex="1">
+          <mxGeometry x="50" y="450" width="1300" height="380" as="geometry" />
+        </mxCell>
+        <mxCell id="appgw" value="&lt;b&gt;App Gateway&lt;/b&gt;&#xa;WAFv2 + OWASP" style="shape=mxgraph.azure.application_gateway;fillColor=#ffffff;strokeColor=#0078D4;html=1;" parent="1" vertex="1">
+          <mxGeometry x="200" y="500" width="100" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="aks" value="&lt;b&gt;AKS Cluster&lt;/b&gt;&#xa;K8s 1.28+ / Istio" style="shape=mxgraph.azure.kubernetes_service;fillColor=#ffffff;strokeColor=#0078D4;html=1;" parent="1" vertex="1">
+          <mxGeometry x="500" y="480" width="120" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="svc_web" value="&lt;b&gt;Web Frontend&lt;/b&gt;&#xa;React + Ingress" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;arcSize=6;" parent="1" vertex="1">
+          <mxGeometry x="420" y="610" width="110" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="svc_order" value="&lt;b&gt;Order API&lt;/b&gt;&#xa;Azure Functions" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;arcSize=6;" parent="1" vertex="1">
+          <mxGeometry x="560" y="610" width="110" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="svc_records" value="&lt;b&gt;Patient API&lt;/b&gt;&#xa;Node.js / Python" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;arcSize=6;" parent="1" vertex="1">
+          <mxGeometry x="700" y="610" width="110" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="svc_bot" value="&lt;b&gt;Health Bot&lt;/b&gt;&#xa;Azure Bot Service&#xa;+ OpenAI GPT-4o" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#C2185B;arcSize=6;" parent="1" vertex="1">
+          <mxGeometry x="840" y="610" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="apim" value="&lt;b&gt;API Management&lt;/b&gt;&#xa;Rate Limit / Auth" style="shape=mxgraph.azure.api_management;fillColor=#ffffff;strokeColor=#0078D4;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1050" y="500" width="100" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="pe_label" value="&lt;i&gt;Private Endpoints&lt;/i&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="80" y="720" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="sql" value="&lt;b&gt;Azure SQL DB&lt;/b&gt;&#xa;Hyperscale / TDE" style="shape=mxgraph.azure.sql_database;fillColor=#ffffff;strokeColor=#0078D4;html=1;" parent="1" vertex="1">
+          <mxGeometry x="250" y="740" width="100" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cosmos" value="&lt;b&gt;Cosmos DB&lt;/b&gt;&#xa;Session State" style="shape=mxgraph.azure.cosmos_db;fillColor=#ffffff;strokeColor=#0078D4;html=1;" parent="1" vertex="1">
+          <mxGeometry x="450" y="740" width="100" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="blob" value="&lt;b&gt;Blob Storage&lt;/b&gt;&#xa;Medical Images&#xa;+ Immutability" style="shape=mxgraph.azure.blob_storage;fillColor=#ffffff;strokeColor=#0078D4;html=1;" parent="1" vertex="1">
+          <mxGeometry x="650" y="740" width="100" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="redis" value="&lt;b&gt;Azure Cache&lt;/b&gt;&#xa;(Redis)" style="shape=mxgraph.azure.cache_redis;fillColor=#ffffff;strokeColor=#0078D4;html=1;" parent="1" vertex="1">
+          <mxGeometry x="850" y="740" width="100" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="adb2c" value="&lt;b&gt;Azure AD B2C&lt;/b&gt;&#xa;Patient Identity&#xa;MFA / Custom Flows" style="shape=mxgraph.azure.active_directory;fillColor=#ffffff;strokeColor=#0078D4;html=1;" parent="1" vertex="1">
+          <mxGeometry x="80" y="880" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="kv" value="&lt;b&gt;Key Vault&lt;/b&gt;&#xa;Secrets / Certs / Keys" style="shape=mxgraph.azure.key_vault;fillColor=#ffffff;strokeColor=#0078D4;html=1;" parent="1" vertex="1">
+          <mxGeometry x="320" y="880" width="100" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="defender" value="&lt;b&gt;Defender for Cloud&lt;/b&gt;&#xa;Secure Score" style="shape=mxgraph.azure.defender;fillColor=#ffffff;strokeColor=#0078D4;html=1;" parent="1" vertex="1">
+          <mxGeometry x="520" y="880" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="sentinel" value="&lt;b&gt;Sentinel&lt;/b&gt;&#xa;SIEM / SOAR&#xa;Detection Rules" style="shape=mxgraph.azure.sentinel;fillColor=#ffffff;strokeColor=#0078D4;html=1;" parent="1" vertex="1">
+          <mxGeometry x="720" y="880" width="100" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ops_box" value="&lt;b&gt;OPERATIONS &amp;amp; DEVOPS&lt;/b&gt;" style="swimlane;fillColor=#FFF8E1;strokeColor=#F57F17;swimlaneFillColor=#FFF8E1;rounded=1;arcSize=8;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1050" y="720" width="280" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="monitor" value="&lt;b&gt;Monitor +&#xa;App Insights&lt;/b&gt;" style="shape=mxgraph.azure.monitor;fillColor=#ffffff;strokeColor=#0078D4;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1080" y="770" width="90" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="loganalytics" value="&lt;b&gt;Log Analytics&#xa;Workspace&lt;/b&gt;" style="shape=mxgraph.azure.log_analytics_workspaces;fillColor=#ffffff;strokeColor=#0078D4;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1200" y="770" width="100" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="devops" value="&lt;b&gt;Azure DevOps&lt;/b&gt;&#xa;CI/CD Pipelines" style="shape=mxgraph.azure.azure_devops;fillColor=#ffffff;strokeColor=#0078D4;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1080" y="870" width="100" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="backup" value="&lt;b&gt;Backup Center&lt;/b&gt;&#xa;Policy / RSV" style="shape=mxgraph.azure.backup_center;fillColor=#ffffff;strokeColor=#0078D4;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1210" y="870" width="90" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="HTTPS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;" parent="1" source="user" target="frontdoor" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;" parent="1" source="frontdoor" target="az_fw" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;" parent="1" source="az_fw" target="appgw" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;" parent="1" source="appgw" target="aks" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;" parent="1" source="aks" target="svc_web" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;" parent="1" source="aks" target="svc_order" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;" parent="1" source="aks" target="svc_records" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;" parent="1" source="aks" target="svc_bot" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" value="SQL / PE" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;" parent="1" source="svc_records" target="sql" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" value="NoSQL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;" parent="1" source="svc_web" target="cosmos" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" value="Cache" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;" parent="1" source="svc_bot" target="redis" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" value="REST" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;" parent="1" source="svc_order" target="blob" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" value="Internal APIs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;" parent="1" source="apim" target="svc_order" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" value="OAuth2 / OIDC" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0078D4;dashed=1;" parent="1" source="adb2c" target="appgw" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" value="CMK / TDE" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0078D4;dashed=1;dashPattern=1 1;" parent="1" source="kv" target="sql" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e16" value="Secrets" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0078D4;dashed=1;dashPattern=1 1;" parent="1" source="kv" target="aks" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e17" value="Metrics / Logs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#F57F17;dashed=1;" parent="1" source="monitor" target="aks" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#F57F17;dashed=1;" parent="1" source="monitor" target="appgw" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e19" value="Ingestion" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0078D4;dashed=1;" parent="1" source="sentinel" target="loganalytics" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e20" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0078D4;" parent="1" source="ddos" target="frontdoor" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -9,6 +9,9 @@ function App() {
     setCounter(counter + 1)
     setCounter(counter + 1)
     setCounter(counter + 1)
+
+    setCounter(prev => prev + 1);
+    setCounter(prev => prev + 1);
   }
 
   return (
