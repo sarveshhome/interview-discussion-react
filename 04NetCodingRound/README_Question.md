@@ -86,3 +86,11 @@ public class PaymentResult
 }
 
 ```
+
+
+
+### For local development, you can use User Secrets:
+
+```
+dotnet user-secrets set "PaymentGateway:ApiKey" "sk_live_xxxxxxxxx"
+```
