@@ -7,7 +7,7 @@ function User() {
     data,
     loading,
     error
-  } = useFetch('/users');
+  } = useFetch('/users/1');
 
   if (loading) {
     return <h2>Loading...</h2>;
@@ -25,7 +25,7 @@ function User() {
     <div>
       <h1>Users</h1>
 
-      {data.map(user => (
+      {data && data.map(user => (
         <div key={user.id}>
           <h3>{user.name}</h3>
           <p>{user.email}</p>

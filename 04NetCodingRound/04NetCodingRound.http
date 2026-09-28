@@ -1,0 +1,6 @@
+@_04NetCodingRound_HostAddress = http://localhost:5073
+
+GET {{_04NetCodingRound_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
