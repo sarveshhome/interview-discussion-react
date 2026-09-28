@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>_04NetCodingRound</RootNamespace>
+    <UserSecretsId>04NetCodingRound</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
